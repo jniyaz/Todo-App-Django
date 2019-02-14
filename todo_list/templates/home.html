@@ -22,13 +22,27 @@
             </thead>
             <tbody>
             {% for item in all_items %}
-                <tr>
-                    <td>{{ item.item }}</td>
-                    <td class="text-center">{{ item.completed }}</td>
-                    <td class="text-center">
-                        <a href="{% url 'delete' item.id %}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
-                    </td>
-                </tr>
+                {% if item.completed %}
+                    <tr class="table-secondary">
+                        <td>{{ item.item }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'status_completed' item.id %}">Done</a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'delete' item.id %}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td>{{ item.item }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'status_not_completed' item.id %}">Undone</a>
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'delete' item.id %}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
