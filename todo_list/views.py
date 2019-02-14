@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import List
 from .forms import ListForm
 from django.contrib import messages
+from pprint import pprint
 
 def home(request):
     if request.method == 'POST':
@@ -34,3 +35,18 @@ def status_not_completed(request, list_id):
     item.save()
     messages.success(request, ('Task has been marked as not completed'))
     return redirect('home')
+
+def edit(request, list_id):
+    if request.method == 'POST':
+        item = List.objects.get(pk=list_id)
+
+        form = ListForm(request.POST or None, instance=item)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Task Item has been updated'))
+            return redirect('home')
+
+    else:
+        item = List.objects.get(pk=list_id)
+        return render(request, 'edit.html', {'item':item})

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if item %}
+       <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Task Title</label>
+                    <input type="text" class="form-control" id="item" name="item" value="{{ item.item }}" placeholder="{{ item.item }}">
+                  </div>
+                  <div class="form-group">
+                        <label for="exampleInputEmail1">Status</label>
+                        <select class="form-control form-control-sm" name="completed">
+                            <option value="True" {{ item.completed|yesno:"selected,," }}/>Completed</option>
+                            <option value="False" {{ item.completed|yesno:",selected," }}>Not Completed</option>
+                        </select>
+                  </div>
+                  <a href="{% url 'home' %}" class="btn btn-warning">Go Back</a>
+                  <button type="submit" class="btn btn-success">Update</button>
+                </form>
+            </div>
+       </div>
+    {% endif %}
+{% endblock %}

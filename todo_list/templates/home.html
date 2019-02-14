@@ -16,7 +16,7 @@
     {% if all_items %}
         <table class="table table-bordered table-hover">
             <thead class="text-center">
-                <th>Title</th>
+                <th>Task Title</th>
                 <th>Status</th>
                 <th>Action</th>
             </thead>
@@ -29,6 +29,7 @@
                             <span class="badge badge-success"><a href="{% url 'status_not_completed' item.id %}">Completed</a></span>
                         </td>
                         <td class="text-center">
+                            <a href="{% url 'edit' item.id %}" class="btn btn-sm btn-primary">Edit</a>
                             <a href="{% url 'delete' item.id %}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
@@ -39,6 +40,7 @@
                             <span class="badge badge-warning"><a href="{% url 'status_completed' item.id %}">Not Completed</a></span>
                         </td>
                         <td class="text-center">
+                            <a href="{% url 'edit' item.id %}" class="btn btn-sm btn-primary">Edit</a>
                             <a href="{% url 'delete' item.id %}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
                         </td>
                     </tr>
