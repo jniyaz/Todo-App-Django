@@ -24,9 +24,9 @@
             {% for item in all_items %}
                 {% if item.completed %}
                     <tr class="table-secondary">
-                        <td>{{ item.item }}</td>
+                        <td class="stricker">{{ item.item }}</td>
                         <td class="text-center">
-                            <a href="{% url 'status_completed' item.id %}">Done</a>
+                            <span class="badge badge-success"><a href="{% url 'status_not_completed' item.id %}">Completed</a></span>
                         </td>
                         <td class="text-center">
                             <a href="{% url 'delete' item.id %}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
@@ -36,7 +36,7 @@
                     <tr>
                         <td>{{ item.item }}</td>
                         <td class="text-center">
-                            <a href="{% url 'status_not_completed' item.id %}">Undone</a>
+                            <span class="badge badge-warning"><a href="{% url 'status_completed' item.id %}">Not Completed</a></span>
                         </td>
                         <td class="text-center">
                             <a href="{% url 'delete' item.id %}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
